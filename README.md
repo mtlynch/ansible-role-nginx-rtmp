@@ -29,7 +29,7 @@ Use `ansible-galaxy install nginxinc.nginx` to install the latest stable release
 
 **Git**
 
-Use `git clone https://github.com/nginxinc/ansible-role-nginx.git` to pull the latest edge commit of the role from GitHub.
+Use `git clone https://github.com/mtlynch/ansible-role-nginx-rtmp.git` to pull the latest edge commit of the role from GitHub.
 
 Platforms
 ---------
@@ -445,7 +445,7 @@ This is a sample playbook file for deploying the Ansible Galaxy NGINX role in a 
 
 To run any of the above sample playbooks create a `setup-nginx.yml` file and paste the contents. Executing the Ansible Playbook is then as simple as executing `ansible-playbook setup-nginx.yml`.
 
-Alternatively, you can also clone this repository instead of installing it from Ansible Galaxy. If you decide to do so, replace the role variable in the previous sample playbooks from `nginxinc.nginx` to `ansible-role-nginx`.
+Alternatively, you can also clone this repository instead of installing it from Ansible Galaxy. If you decide to do so, replace the role variable in the previous sample playbooks from `nginxinc.nginx` to `ansible-role-nginx-rtmp`.
 
 Other NGINX Roles
 -----------------
@@ -455,7 +455,7 @@ You can find an Ansible collection of roles to help you install and configure NG
 License
 -------
 
-[Apache License, Version 2.0](https://github.com/nginxinc/ansible-role-nginx/blob/master/LICENSE)
+[Apache License, Version 2.0](https://github.com/nginxinc/ansible-role-nginx-rtmp/blob/master/LICENSE)
 
 Author Information
 ------------------

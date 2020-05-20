@@ -15,6 +15,6 @@
         version: "-1.17.8-1.el{{ ansible_distribution_major_version }}.ngx"
       when: ansible_os_family == "RedHat"
   roles:
-    - role: ansible-role-nginx
+    - role: ansible-role-nginx-rtmp
   vars:
     nginx_version: "{{ version }}"
