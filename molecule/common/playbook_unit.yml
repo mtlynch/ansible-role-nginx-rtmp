@@ -2,13 +2,6 @@
 - name: Converge
   hosts: all
   pre_tasks:
-    - name: "Set module if Alpine"
-      set_fact:
-        module:
-          - "unit-perl"
-          - "unit-php7"
-          - "unit-python3"
-      when: ansible_os_family == "Alpine"
     - name: "Set module if Debian/RedHat"
       set_fact:
         module:

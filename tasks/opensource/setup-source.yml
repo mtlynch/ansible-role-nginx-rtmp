@@ -53,30 +53,6 @@
         state: present
       when: ansible_os_family == "Debian"
 
-    - name: "(Install: Linux) Install Build Tools - Alpine"
-      package:
-        name:
-          - python
-          - alpine-sdk
-          - build-base
-          - git
-          - wget
-          - perl
-          - linux-headers
-          - tar
-          - openrc
-        state: present
-      when: ansible_os_family == "Alpine"
-
-    - name: "(Install: Linux) Enable openrc - Alpine"
-      copy:
-        content: ""
-        dest: /run/openrc/softlevel
-        force: no
-        owner: root
-        mode: 0644
-      when: ansible_os_family == "Alpine"
-
 - name: "(Install: Linux) Check for Source Installs"
   block:
 
@@ -105,12 +81,6 @@
   when: nginx_install_source_pcre and ansible_os_family == "Debian"
   package:
     name: libpcre3–dev
-    state: present
-
-- name: "(Install: Linux) Install PCRE Dependency: Package: Alpine"
-  when: nginx_install_source_pcre and ansible_os_family == "Alpine"
-  package:
-    name: pcre-dev
     state: present
 
 - name: "(Install: Linux) Install PCRE Dependency: Source"
@@ -157,12 +127,6 @@
     name: zlib1g-dev
     state: present
 
-- name: "(Install: Linux) Install zlib Dependency: Package: Alpine"
-  when: nginx_install_source_zlib and ansible_os_family == "Alpine"
-  package:
-    name: zlib-dev
-    state: present
-
 - name: "(Install: Linux) Install zlib Dependency: Source"
   when: not zlib_result.stat.exists and not nginx_install_source_zlib
   block:
@@ -205,12 +169,6 @@
   when: nginx_install_source_openssl and ansible_os_family == "Debian"
   package:
     name: libssl-dev
-    state: present
-
-- name: "(Install: Linux) Install OpenSSL Dependency: Package: Alpine"
-  when: nginx_install_source_openssl and ansible_os_family == "Alpine"
-  package:
-    name: openssl-dev
     state: present
 
 - name: "(Install: Linux) Install OpenSSL Dependency: Source"
