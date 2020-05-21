@@ -261,8 +261,8 @@
 
     - name: "(Install: Linux) Install NGINX: Download"
       get_url:
-        url: "http://nginx.org/download/nginx-{{ nginx_download_name }}.tar.gz"
-        dest: "/tmp/{{ nginx_download_name }}.tar.gz"
+        url: "http://nginx.org/download/nginx-{{ nginx_version  }}.tar.gz"
+        dest: "/tmp/nginx-{{ nginx_version  }}.tar.gz"
       register: nginx_source
 
     - name: "(Install: Linux) Install NGINX: Unpack"
