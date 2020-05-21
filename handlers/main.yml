@@ -17,11 +17,6 @@
     - nginx_start | bool
     - not ansible_check_mode
 
-- name: "(Handler: All OSs) Start NGINX Amplify Agent"
-  service:
-    name: amplify-agent
-    state: started
-
 - name: "(Handler: Debian/Ubuntu/CentOS/RedHat) Start NGINX Unit"
   service:
     name: unit

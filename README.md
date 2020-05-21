@@ -3,7 +3,7 @@ Ansible NGINX Role
 
 [![Build Status](https://travis-ci.org/mtlynch/ansible-role-nginx-rtmp.svg?branch=master)](https://travis-ci.org/mtlynch/ansible-role-nginx-rtmp)
 
-This role installs NGINX Open Source, NGINX Plus, the NGINX Amplify agent, or NGINX Unit on your target host.
+This role installs NGINX Open Source, NGINX Plus, or NGINX Unit on your target host.
 
 **Note:** This role is still in active development. There may be unidentified issues and the role variables may change as development continues.
 
@@ -34,7 +34,7 @@ Use `git clone https://github.com/mtlynch/ansible-role-nginx-rtmp.git` to pull t
 Platforms
 ---------
 
-The NGINX Ansible role supports all platforms supported by [NGINX Open Source](https://nginx.org/en/linux_packages.html#mainline), [NGINX Plus](https://www.nginx.com/products/technical-specs/), the [NGINX Amplify agent](https://github.com/nginxinc/nginx-amplify-doc/blob/master/amplify-faq.md#21-what-operating-systems-are-supported), and [NGINX Unit](https://unit.nginx.org/installation/#official-packages):
+The NGINX Ansible role supports all platforms supported by [NGINX Open Source](https://nginx.org/en/linux_packages.html#mainline), [NGINX Plus](https://www.nginx.com/products/technical-specs/), and [NGINX Unit](https://unit.nginx.org/installation/#official-packages):
 
 **NGINX Open Source**
 
@@ -108,30 +108,6 @@ Ubuntu:
     - bionic
 ```
 
-**NGINX Amplify Agent**
-
-```yaml
-Amazon Linux:
-  versions:
-    - 2017.09
-CentOS:
-  versions:
-    - 6
-    - 7
-Debian:
-  versions:
-    - jessie
-    - stretch
-Ubuntu:
-  versions:
-    - xenial
-    - bionic
-RedHat:
-  versions:
-    - 6
-    - 7
-```
-
 **NGINX Unit**
 
 ```yaml
@@ -164,7 +140,6 @@ Role Variables
 This role has multiple variables. The descriptions and defaults for all these variables can be found in the directory **`defaults/main`** in the following files:
 
 -   **[defaults/main/main.yml](./defaults/main/main.yml):** NGINX installation variables
--   **[defaults/main/amplify.yml](./defaults/main/amplify.yml):** NGINX Amplify agent installation variables
 -   **[defaults/main/template.yml](./defaults/main/template.yml):** NGINX configuration templating variables
 -   **[defaults/main/upload.yml](./defaults/main/upload.yml):** NGINX configuration/HTML/SSL upload variables
 -   **[defaults/main/linux.yml](./defaults/main/linux.yml):** Linux installation variables
