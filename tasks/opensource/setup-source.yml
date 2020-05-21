@@ -261,7 +261,7 @@
 
     - name: "Set repo if RedHat"
       set_fact:
-        nginx_source_dir: "/tmp/nginx-{{ nginx_version  }}.tar.gz"
+        nginx_source_dir: "/tmp/nginx-{{ nginx_version  }}"
 
     - name: "(Install: Linux) Install NGINX: Download"
       unarchive:
