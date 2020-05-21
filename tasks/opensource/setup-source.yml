@@ -245,53 +245,11 @@
         chdir: "/tmp/{{ openssl_version }}"
         target: install
 
-- name: "(Install: Linux) Install NGINX: Get NGINX version"
-  block:
-
-    - name: "(Install: Linux) Install NGINX: Get NGINX mainline version"
-      shell:
-      args:
-        cmd: curl --stderr - https://trac.nginx.org/nginx/browser | grep release | head -1 | sed -e 's:.*<option value="[^"]*">release\([^<]*\)<.*:nginx\1:'  # noqa 204 303
-      register: nginx_mainline_version
-      changed_when: false
-      when: nginx_branch == "mainline"
-
-    - name: "(Install: Linux) Install NGINX: Set NGINX mainline version"
-      set_fact:
-        nginx_version: "{{ nginx_mainline_version.stdout }}"
-      when: nginx_branch == "mainline"
-
-    - name: "(Install: Linux) Install NGINX: Get NGINX stable version 1/2"
-      shell:
-      args:
-        cmd: curl --stderr - https://trac.nginx.org/nginx/browser | grep stable | head -1 | sed -e 's:.*<option value="[^"]*">stable\([^<]*\)<.*:release\1:'  # noqa 204 303
-      register: nginx_tmp_version
-      changed_when: false
-      when: nginx_branch == "stable"
-
-    - name: "(Install: Linux) Install NGINX: Get NGINX stable version 2/2"
-      shell:
-      args:
-        cmd: curl --stderr - https://trac.nginx.org/nginx/browser | grep {{ nginx_tmp_version.stdout }} | head -1 | sed -e 's:.*<option value="[^"]*">release\([^<]*\)<.*:nginx\1:'  # noqa 204 303
-      register: nginx_stable_version
-      changed_when: false
-      when: nginx_branch == "stable"
-
-    - name: "(Install: Linux) Install NGINX: Set NGINX stable version"
-      set_fact:
-        nginx_version: "{{ nginx_stable_version.stdout }}"
-      when: nginx_branch == "stable"
-
-    - name: "(Install: Linux) Install NGINX: Set NGINX download filename"
-      set_fact:
-        nginx_download_name: "{{ nginx_version }}"
-      when: nginx_branch == "stable" or nginx_branch == "mainline"
-
-    - name: "(Install: Linux) Check for NGINX Install"
-      stat:
-        path: /usr/sbin/nginx
-        follow: true
-      register: nginx_result
+- name: "(Install: Linux) Check for NGINX Install"
+  stat:
+    path: /usr/sbin/nginx
+    follow: true
+  register: nginx_result
 
 - name: "(Install: Linux) Add NGINX User"
   user:
@@ -301,18 +259,17 @@
   when: not nginx_result.stat.exists
   block:
 
-    - name: "(Install: Linux) Install NGINX: Download"
-      get_url:
-        url: "http://nginx.org/download/{{ nginx_download_name }}.tar.gz"
-        dest: "/tmp/{{ nginx_download_name }}.tar.gz"
-      register: nginx_source
+    - name: "Set repo if RedHat"
+      set_fact:
+        nginx_source_dir: "/tmp/nginx-{{ nginx_version  }}"
 
-    - name: "(Install: Linux) Install NGINX: Unpack"
+    - name: "(Install: Linux) Install NGINX: Download"
       unarchive:
-        copy: no
-        dest: /tmp/
-        src: "{{ nginx_source.dest }}"
-      register: nginx_source_unpack
+        src: "https://nginx.org/download/nginx-{{ nginx_version }}.tar.gz"
+        # The archive contains a folder called nginx-x.yy.zz so we unarchive
+        # it to the parent directory.
+        dest: "{{ nginx_source_dir | dirname }}"
+        remote_src: yes
 
     - name: "(Install: Linux) Install NGINX: Configure"
       command: >-
@@ -331,16 +288,16 @@
         {{ nginx_install_source_zlib | ternary('', '--with-zlib=../' + zlib_version) }}
         {{ nginx_install_source_openssl | ternary('', '--with-openssl=../' + openssl_version) }}
       args:
-        chdir: "/tmp/{{ nginx_version }}"
+        chdir: "{{ nginx_source_dir }}"
       register: nginx_configure
 
     - name: "(Install: Linux) Install NGINX: Make"
       make:
-        chdir: "/tmp/{{ nginx_version }}"
+        chdir: "{{ nginx_source_dir }}"
 
     - name: "(Install: Linux) Install NGINX: Install"
       make:
-        chdir: "/tmp/{{ nginx_version }}"
+        chdir: "{{ nginx_source_dir }}"
         target: install
 
     - name: "(Install: Linux) Install NGINX: Create html directory"
@@ -433,5 +390,5 @@
     - "{{ pcre_source.dest }}"
     - "{{ zlib_source.dest }}"
     - "{{ openssl_source.dest }}"
-    - "{{ nginx_source.dest }}"
+    - "{{ nginx_source_dir }}"
   when: item is defined
