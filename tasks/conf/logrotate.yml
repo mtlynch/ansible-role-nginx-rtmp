@@ -1,9 +1,4 @@
 ---
-- name: "(Config: Alpine) Install Logrotate"
-  apk:
-    name: logrotate
-  when: ansible_os_family == "Alpine"
-
 - name: "(Config: Ubuntu/Debian) Install Logrotate"
   apt:
     name: logrotate
