@@ -290,7 +290,7 @@
 
     - name: "(Install: Linux) Install NGINX: Download"
       get_url:
-        url: "http://nginx.org/download/{{ nginx_download_name }}.tar.gz"
+        url: "http://nginx.org/download/nginx-{{ nginx_download_name }}.tar.gz"
         dest: "/tmp/{{ nginx_download_name }}.tar.gz"
       register: nginx_source
 
