@@ -248,19 +248,6 @@
 - name: "(Install: Linux) Install NGINX: Get NGINX version"
   block:
 
-    - name: "(Install: Linux) Install NGINX: Get NGINX mainline version"
-      shell:
-      args:
-        cmd: curl --stderr - https://trac.nginx.org/nginx/browser | grep release | head -1 | sed -e 's:.*<option value="[^"]*">release\([^<]*\)<.*:nginx\1:'  # noqa 204 303
-      register: nginx_mainline_version
-      changed_when: false
-      when: nginx_branch == "mainline"
-
-    - name: "(Install: Linux) Install NGINX: Set NGINX mainline version"
-      set_fact:
-        nginx_version: "{{ nginx_mainline_version.stdout }}"
-      when: nginx_branch == "mainline"
-
     - name: "(Install: Linux) Install NGINX: Get NGINX stable version 1/2"
       shell:
       args:
