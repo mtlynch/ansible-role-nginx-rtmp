@@ -157,13 +157,7 @@ RedHat:
     - 7
 Debian:
   versions:
-    - jessie
-    - stretch
     - buster
-Ubuntu:
-  versions:
-    - xenial
-    - bionic
 Amazon Linux:
   versions:
     - 2018.03

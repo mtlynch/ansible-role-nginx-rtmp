@@ -17,6 +17,6 @@ install:
 script:
   - molecule --version
   - ansible --version
-  - travis_wait 50 molecule test -s $scenario
+  - molecule test -s $scenario
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
