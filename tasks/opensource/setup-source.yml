@@ -259,18 +259,17 @@
   when: not nginx_result.stat.exists
   block:
 
-    - name: "(Install: Linux) Install NGINX: Download"
-      get_url:
-        url: "http://nginx.org/download/nginx-{{ nginx_version  }}.tar.gz"
-        dest: "/tmp/nginx-{{ nginx_version  }}.tar.gz"
-      register: nginx_source
+    - name: "Set repo if RedHat"
+      set_fact:
+        nginx_source_dir: "/tmp/nginx-{{ nginx_version  }}.tar.gz"
 
-    - name: "(Install: Linux) Install NGINX: Unpack"
+    - name: "(Install: Linux) Install NGINX: Download"
       unarchive:
-        copy: no
-        dest: /tmp/
-        src: "{{ nginx_source.dest }}"
-      register: nginx_source_unpack
+        src: "https://nginx.org/download/nginx-{{ nginx_version }}.tar.gz"
+        # The archive contains a folder called nginx-x.yy.zz so we unarchive
+        # it to the parent directory.
+        dest: "{{ nginx_source_dir | dirname }}"
+        remote_src: yes
 
     - name: "(Install: Linux) Install NGINX: Configure"
       command: >-
@@ -289,16 +288,16 @@
         {{ nginx_install_source_zlib | ternary('', '--with-zlib=../' + zlib_version) }}
         {{ nginx_install_source_openssl | ternary('', '--with-openssl=../' + openssl_version) }}
       args:
-        chdir: "/tmp/{{ nginx_version }}"
+        chdir: "{{ nginx_source_dir }}"
       register: nginx_configure
 
     - name: "(Install: Linux) Install NGINX: Make"
       make:
-        chdir: "/tmp/{{ nginx_version }}"
+        chdir: "{{ nginx_source_dir }}"
 
     - name: "(Install: Linux) Install NGINX: Install"
       make:
-        chdir: "/tmp/{{ nginx_version }}"
+        chdir: "{{ nginx_source_dir }}"
         target: install
 
     - name: "(Install: Linux) Install NGINX: Create html directory"
@@ -391,5 +390,5 @@
     - "{{ pcre_source.dest }}"
     - "{{ zlib_source.dest }}"
     - "{{ openssl_source.dest }}"
-    - "{{ nginx_source.dest }}"
+    - "{{ nginx_source_dir }}"
   when: item is defined
