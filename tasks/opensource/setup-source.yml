@@ -245,40 +245,11 @@
         chdir: "/tmp/{{ openssl_version }}"
         target: install
 
-- name: "(Install: Linux) Install NGINX: Get NGINX version"
-  block:
-
-    - name: "(Install: Linux) Install NGINX: Get NGINX stable version 1/2"
-      shell:
-      args:
-        cmd: curl --stderr - https://trac.nginx.org/nginx/browser | grep stable | head -1 | sed -e 's:.*<option value="[^"]*">stable\([^<]*\)<.*:release\1:'  # noqa 204 303
-      register: nginx_tmp_version
-      changed_when: false
-      when: nginx_branch == "stable"
-
-    - name: "(Install: Linux) Install NGINX: Get NGINX stable version 2/2"
-      shell:
-      args:
-        cmd: curl --stderr - https://trac.nginx.org/nginx/browser | grep {{ nginx_tmp_version.stdout }} | head -1 | sed -e 's:.*<option value="[^"]*">release\([^<]*\)<.*:nginx\1:'  # noqa 204 303
-      register: nginx_stable_version
-      changed_when: false
-      when: nginx_branch == "stable"
-
-    - name: "(Install: Linux) Install NGINX: Set NGINX stable version"
-      set_fact:
-        nginx_version: "{{ nginx_stable_version.stdout }}"
-      when: nginx_branch == "stable"
-
-    - name: "(Install: Linux) Install NGINX: Set NGINX download filename"
-      set_fact:
-        nginx_download_name: "{{ nginx_version }}"
-      when: nginx_branch == "stable" or nginx_branch == "mainline"
-
-    - name: "(Install: Linux) Check for NGINX Install"
-      stat:
-        path: /usr/sbin/nginx
-        follow: true
-      register: nginx_result
+- name: "(Install: Linux) Check for NGINX Install"
+  stat:
+    path: /usr/sbin/nginx
+    follow: true
+  register: nginx_result
 
 - name: "(Install: Linux) Add NGINX User"
   user:
