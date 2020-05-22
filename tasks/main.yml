@@ -41,10 +41,6 @@
             or nginx_stream_template_enable
       tags: nginx_template_config
 
-    - import_tasks: conf/setup-status.yml
-      when: nginx_status_enable | bool
-      tags: nginx_setup_status
-
     - import_tasks: modules/install-modules.yml
       when: true in nginx_modules.values()
       tags: nginx_install_modules
