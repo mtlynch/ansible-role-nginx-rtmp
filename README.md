@@ -43,10 +43,6 @@ Debian:
   versions:
     - stretch
     - buster
-Ubuntu:
-  versions:
-    - xenial
-    - bionic
 ```
 
 Role Variables

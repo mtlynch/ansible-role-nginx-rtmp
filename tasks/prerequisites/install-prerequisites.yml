@@ -1,4 +1,4 @@
 ---
-- name: "(Setup: Debian/Ubuntu) Install Prerequisites"
+- name: "(Setup: Debian) Install Prerequisites"
   import_tasks: setup-debian.yml
   when: ansible_os_family == "Debian"

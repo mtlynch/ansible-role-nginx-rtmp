@@ -1,5 +1,5 @@
 ---
-- name: "(Install: Debian/Ubuntu) Set Default APT NGINX Repository"
+- name: "(Install: Debian) Set Default APT NGINX Repository"
   set_fact:
     default_repository:
       - >-
@@ -9,17 +9,17 @@
         deb-src [arch=amd64] https://nginx.org/packages/{{ (nginx_branch == 'mainline')
         | ternary('mainline/', '') }}{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx
 
-- name: "(Install: Debian/Ubuntu) Set APT NGINX Repository"
+- name: "(Install: Debian) Set APT NGINX Repository"
   set_fact:
     repository: "{{ nginx_repository | default(default_repository) }}"
 
-- name: "(Install: Debian/Ubuntu) Add NGINX Repository"
+- name: "(Install: Debian) Add NGINX Repository"
   apt_repository:
     repo: "{{ item }}"
   with_items:
     - "{{ repository }}"
 
-- name: "(Install: Debian/Ubuntu) Install NGINX"
+- name: "(Install: Debian) Install NGINX"
   apt:
     name: "nginx{{ nginx_version | default('') }}"
     state: "{{ nginx_state }}"

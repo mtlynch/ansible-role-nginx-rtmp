@@ -9,7 +9,7 @@
         repo: deb http://ftp.us.debian.org/debian buster-backports main
       when: ansible_distribution_release == "buster"
 
-    - name: "(Install: Linux) Install Build Tools - Debian/Ubuntu"
+    - name: "(Install: Linux) Install Build Tools - Debian"
       package:
         name:
           - python-minimal
@@ -40,7 +40,7 @@
         path: /tmp/{{ openssl_version }}
       register: openssl_result
 
-- name: "(Install: Linux) Install PCRE Dependency: Package: Debian/Ubuntu"
+- name: "(Install: Linux) Install PCRE Dependency: Package: Debian"
   when: nginx_install_source_pcre and ansible_os_family == "Debian"
   package:
     name: libpcre3–dev
@@ -78,7 +78,7 @@
         chdir: "/tmp/{{ pcre_version }}"
         target: install
 
-- name: "(Install: Linux) Install zlib Dependency: Package: Debian/Ubuntu"
+- name: "(Install: Linux) Install zlib Dependency: Package: Debian"
   when: nginx_install_source_zlib and ansible_os_family == "Debian"
   package:
     name: zlib1g-dev
@@ -116,7 +116,7 @@
         chdir: "/tmp/{{ zlib_version }}"
         target: install
 
-- name: "(Install: Linux) Install OpenSSL Dependency: Package: Debian/Ubuntu"
+- name: "(Install: Linux) Install OpenSSL Dependency: Package: Debian"
   when: nginx_install_source_openssl and ansible_os_family == "Debian"
   package:
     name: libssl-dev

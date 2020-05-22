@@ -1,5 +1,5 @@
 ---
-- name: "(Config: Ubuntu/Debian) Install Logrotate"
+- name: "(Config: Debian) Install Logrotate"
   apt:
     name: logrotate
     state: present
