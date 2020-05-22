@@ -41,10 +41,6 @@
             or nginx_stream_template_enable
       tags: nginx_template_config
 
-    - import_tasks: modules/install-modules.yml
-      when: true in nginx_modules.values()
-      tags: nginx_install_modules
-
     - import_tasks: conf/debug-output.yml
       when: nginx_debug_output | bool
       tags: nginx_debug_output
