@@ -5,12 +5,6 @@
     state: present
   when: ansible_os_family == "Debian"
 
-- name: "(Config: RedHat) Install Logrotate"
-  yum:
-    name: logrotate
-    state: present
-  when: ansible_os_family == "RedHat"
-
 - name: "(Config: SUSE) Add Logrotate Repo"
   zypper_repository:
     repo: https://download.opensuse.org/repositories/openSUSE:Leap:42.1/standard/openSUSE:Leap:42.1.repo
