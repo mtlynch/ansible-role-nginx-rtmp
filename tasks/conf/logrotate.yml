@@ -5,7 +5,7 @@
     state: present
   when: ansible_os_family == "Debian"
 
-- name: "(Config: CentOS/RedHat) Install Logrotate"
+- name: "(Config: RedHat) Install Logrotate"
   yum:
     name: logrotate
     state: present

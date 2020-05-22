@@ -15,7 +15,7 @@
     - nginx_install_from == "nginx_repository"
   tags: nginx_rpmkey
 
-- name: "(Install: Debian/Ubuntu/CentOS/RedHat) Install NGINX"
+- name: "(Install: Debian/Ubuntu/RedHat) Install NGINX"
   block:
 
     - import_tasks: opensource/install-oss.yml

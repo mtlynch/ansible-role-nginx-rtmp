@@ -1,16 +1,16 @@
 ---
-- name: "(Install: CentOS/RedHat) Set Default YUM NGINX Repository"
+- name: "(Install: RedHat) Set Default YUM NGINX Repository"
   set_fact:
     default_repository: >-
       https://nginx.org/packages/{{ (nginx_branch == 'mainline')
       | ternary('mainline/', '') }}{{ (ansible_distribution == "RedHat")
       | ternary('rhel', 'centos') }}/{{ ansible_distribution_major_version }}/$basearch/
 
-- name: "(Install: CentOS/RedHat) Set YUM NGINX Repository"
+- name: "(Install: RedHat) Set YUM NGINX Repository"
   set_fact:
     repository: "{{ nginx_repository | default(default_repository) }}"
 
-- name: "(Install: CentOS/RedHat) Add NGINX Repository"
+- name: "(Install: RedHat) Add NGINX Repository"
   yum_repository:
     name: nginx
     baseurl: "{{ repository }}"
@@ -18,11 +18,11 @@
     enabled: yes
     gpgcheck: yes
 
-- name: "(Install: CentOS/RedHat) Install Required CentOS/RedHat Dependencies"
+- name: "(Install: RedHat) Install Required RedHat Dependencies"
   yum:
     name: openssl
 
-- name: "(Install: CentOS/RedHat) Install NGINX"
+- name: "(Install: RedHat) Install NGINX"
   yum:
     name: "nginx{{ nginx_version | default('') }}"
     state: "{{ nginx_state }}"
