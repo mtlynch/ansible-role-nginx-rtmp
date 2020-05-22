@@ -39,11 +39,6 @@ The NGINX Ansible role supports all platforms supported by [NGINX Open Source](h
 **NGINX Open Source**
 
 ```yaml
-CentOS:
-  versions:
-    - 6
-    - 7
-    - 8
 Debian:
   versions:
     - stretch

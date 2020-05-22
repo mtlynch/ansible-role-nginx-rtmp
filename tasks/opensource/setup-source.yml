@@ -3,7 +3,7 @@
   when: nginx_install_source_build_tools
   block:
 
-    - name: "(Install: Linux) Install Python - Centos/RHEL"
+    - name: "(Install: Linux) Install Python - RHEL"
       package:
         name:
           - python3
@@ -12,14 +12,14 @@
         state: present
       when: ansible_os_family == "RedHat"
 
-    - name: "(Install: Linux) Set Python3 default - Centos/RHEL"
+    - name: "(Install: Linux) Set Python3 default - RHEL"
       alternatives:
         name: python
         path: /usr/bin/python3
         link: /usr/bin/python
       when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "8"
 
-    - name: "(Install: Linux) Install Build Tools - Centos/RHEL"
+    - name: "(Install: Linux) Install Build Tools - RHEL"
       package:
         name:
           - "@Development tools"
@@ -71,7 +71,7 @@
         path: /tmp/{{ openssl_version }}
       register: openssl_result
 
-- name: "(Install: Linux) Install PCRE Dependency: Package: Centos/RHEL"
+- name: "(Install: Linux) Install PCRE Dependency: Package: RHEL"
   when: nginx_install_source_pcre and ansible_os_family == "RedHat"
   package:
     name: pcre-devel
@@ -115,7 +115,7 @@
         chdir: "/tmp/{{ pcre_version }}"
         target: install
 
-- name: "(Install: Linux) Install zlib Dependency: Package: Centos/RHEL"
+- name: "(Install: Linux) Install zlib Dependency: Package: RHEL"
   when: nginx_install_source_zlib and ansible_os_family == "RedHat"
   package:
     name: zlib-devel
@@ -159,7 +159,7 @@
         chdir: "/tmp/{{ zlib_version }}"
         target: install
 
-- name: "(Install: Linux) Install OpenSSL Dependency: Package: Centos/RHEL"
+- name: "(Install: Linux) Install OpenSSL Dependency: Package: RHEL"
   when: nginx_install_source_openssl and ansible_os_family == "RedHat"
   package:
     name: openssl-devel
