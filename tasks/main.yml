@@ -6,7 +6,6 @@
   when:
     - ansible_os_family == "Debian"
     - nginx_install_from == "nginx_repository"
-      or nginx_unit_enable
   tags: nginx_aptkey
 
 - import_tasks: keys/rpm-key.yml
@@ -14,7 +13,6 @@
     - ansible_os_family == "RedHat"
       or ansible_os_family == "Suse"
     - nginx_install_from == "nginx_repository"
-      or nginx_unit_enable
   tags: nginx_rpmkey
 
 - name: "(Install: Debian/Ubuntu/CentOS/RedHat/FreeBSD) Install NGINX"
@@ -46,10 +44,6 @@
       tags: nginx_debug_output
 
   when: nginx_enable | bool
-
-- import_tasks: unit/install-unit.yml
-  when: nginx_unit_enable | bool
-  tags: nginx_install_unit
 
 - import_tasks: conf/logrotate.yml
   when: nginx_logrotate_conf_enable | bool
