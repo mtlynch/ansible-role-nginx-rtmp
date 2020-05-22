@@ -43,11 +43,6 @@ Debian:
   versions:
     - stretch
     - buster
-RedHat:
-  versions:
-    - 6
-    - 7.4+
-    - 8
 SUSE/SLES:
   versions:
     - 12
