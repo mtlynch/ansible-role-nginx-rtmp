@@ -48,10 +48,6 @@ Debian:
   versions:
     - stretch
     - buster
-FreeBSD:
-  versions:
-    - 11.2+
-    - 12
 RedHat:
   versions:
     - 6
@@ -76,7 +72,6 @@ This role has multiple variables. The descriptions and defaults for all these va
 -   **[defaults/main/template.yml](./defaults/main/template.yml):** NGINX configuration templating variables
 -   **[defaults/main/upload.yml](./defaults/main/upload.yml):** NGINX configuration/HTML/SSL upload variables
 -   **[defaults/main/linux.yml](./defaults/main/linux.yml):** Linux installation variables
--   **[defaults/main/bsd.yml](./defaults/main/bsd.yml):** BSD installation variables
 
 Dependencies
 ------------
