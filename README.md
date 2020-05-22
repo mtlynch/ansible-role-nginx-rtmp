@@ -43,10 +43,6 @@ Debian:
   versions:
     - stretch
     - buster
-SUSE/SLES:
-  versions:
-    - 12
-    - 15
 Ubuntu:
   versions:
     - xenial

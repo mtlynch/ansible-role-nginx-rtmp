@@ -5,17 +5,6 @@
     state: present
   when: ansible_os_family == "Debian"
 
-- name: "(Config: SUSE) Add Logrotate Repo"
-  zypper_repository:
-    repo: https://download.opensuse.org/repositories/openSUSE:Leap:42.1/standard/openSUSE:Leap:42.1.repo
-  when: ansible_os_family == "Suse"
-
-- name: "(Config: SUSE) Install Logrotate"
-  zypper:
-    name: logrotate
-    state: present
-  when: ansible_os_family == "Suse"
-
 - name: "(Config: All OSs) Create Logrotate Config"
   template:
     src: "logrotate/nginx.j2"
