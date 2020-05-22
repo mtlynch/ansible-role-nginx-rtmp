@@ -5,12 +5,6 @@
     - import_tasks: setup-debian.yml
       when: ansible_os_family == "Debian"
 
-    - import_tasks: setup-redhat.yml
-      when: ansible_os_family == "RedHat"
-
-    - import_tasks: setup-suse.yml
-      when: ansible_os_family == "Suse"
-
   when: nginx_install_from == "nginx_repository"
 
 - name: "(Install: Linux) Install NGINX from source"

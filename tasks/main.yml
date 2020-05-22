@@ -8,14 +8,7 @@
     - nginx_install_from == "nginx_repository"
   tags: nginx_aptkey
 
-- import_tasks: keys/rpm-key.yml
-  when:
-    - ansible_os_family == "RedHat"
-      or ansible_os_family == "Suse"
-    - nginx_install_from == "nginx_repository"
-  tags: nginx_rpmkey
-
-- name: "(Install: Debian/Ubuntu/RedHat) Install NGINX"
+- name: "(Install: Debian) Install NGINX"
   block:
 
     - import_tasks: opensource/install-oss.yml

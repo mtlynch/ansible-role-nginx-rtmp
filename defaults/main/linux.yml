@@ -1,6 +1,6 @@
 ---
 # Supported distributions
-nginx_linux_families: ['Debian', 'RedHat', 'Suse']
+nginx_linux_families: ['Debian']
 
 # Default locations and versions for install from source
 pcre_version: pcre-8.43
