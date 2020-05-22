@@ -2,10 +2,6 @@
 # Supported distributions
 nginx_bsd_systems: ['FreeBSD', 'NetBSD', 'OpenBSD', 'DragonFlyBSD', 'HardenedBSD']
 
-# Supported distributions NGINX Plus
-# https://docs.nginx.com/nginx/technical-specs/
-nginx_plus_bsd_systems: ['FreeBSD']
-
 # Choose to install BSD packages or ports.
 # Options are True for packages or False for ports.
 # Default is True.
