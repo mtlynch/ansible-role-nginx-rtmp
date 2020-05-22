@@ -9,7 +9,6 @@
     nginx_modules:
       njs: true
       perl: true
-      waf: false
       geoip: true
       image_filter: true
       rtmp: true

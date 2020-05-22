@@ -3,7 +3,7 @@ Ansible NGINX Role
 
 [![Build Status](https://travis-ci.org/mtlynch/ansible-role-nginx-rtmp.svg?branch=master)](https://travis-ci.org/mtlynch/ansible-role-nginx-rtmp)
 
-This role installs NGINX Open Source, NGINX Plus, or NGINX Unit on your target host.
+This role installs NGINX Open Source or NGINX Unit on your target host.
 
 **Note:** This role is still in active development. There may be unidentified issues and the role variables may change as development continues.
 
@@ -34,7 +34,7 @@ Use `git clone https://github.com/mtlynch/ansible-role-nginx-rtmp.git` to pull t
 Platforms
 ---------
 
-The NGINX Ansible role supports all platforms supported by [NGINX Open Source](https://nginx.org/en/linux_packages.html#mainline), [NGINX Plus](https://www.nginx.com/products/technical-specs/), and [NGINX Unit](https://unit.nginx.org/installation/#official-packages):
+The NGINX Ansible role supports all platforms supported by [NGINX Open Source](https://nginx.org/en/linux_packages.html#mainline) and [NGINX Unit](https://unit.nginx.org/installation/#official-packages):
 
 **NGINX Open Source**
 
@@ -55,47 +55,6 @@ FreeBSD:
 RedHat:
   versions:
     - 6
-    - 7.4+
-    - 8
-SUSE/SLES:
-  versions:
-    - 12
-    - 15
-Ubuntu:
-  versions:
-    - xenial
-    - bionic
-```
-
-**NGINX Plus**
-
-```yaml
-Amazon Linux:
-  versions:
-    - 2018.03
-Amazon Linux 2:
-  versions:
-    - LTS
-CentOS:
-  versions:
-    - 6.5+
-    - 7.4+
-    - 8
-Debian:
-  versions:
-    - stretch
-    - buster
-FreeBSD:
-  versions:
-    - 11.2+
-    - 12
-Oracle Linux:
-  versions:
-    - 6.5+
-    - 7.4+
-RedHat:
-  versions:
-    - 6.5+
     - 7.4+
     - 8
 SUSE/SLES:
@@ -369,19 +328,6 @@ This is a sample playbook file for deploying the Ansible Galaxy NGINX role in a 
         - notifempty
         - create 0644 www-data adm # Changes nginx logs permissions
         - sharedscripts
-```
-
-
-This is a sample playbook file for deploying the Ansible Galaxy NGINX role in a localhost and installing NGINX Plus.
-
-```yaml
----
-- hosts: localhost
-  become: true
-  roles:
-    - role: nginxinc.nginx
-  vars:
-    nginx_type: plus
 ```
 
 This is a sample playbook file for deploying the Ansible Galaxy NGINX role in a localhost to install NGINX Unit and the PHP/Perl NGINX Unit language modules.

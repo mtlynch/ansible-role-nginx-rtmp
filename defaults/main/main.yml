@@ -10,16 +10,9 @@ nginx_start: true
 # Print NGINX configuration file to terminal after executing playbook.
 nginx_debug_output: false
 
-# Specify which type of NGINX you want to install.
-# Options are 'opensource' or 'plus'.
-# Default is 'opensource'.
-nginx_type: opensource
-
 # Specify which version of NGINX you want to install.
-# Default is empty.
-# nginx_version: "=19-1~bionic"
-# For Plus and modules you'll need a wilcard like below (which installs plus-20 and modules)
-# nginx_version: "-20*"
+# Default is 1.17.10.
+nginx_version: "1.17.10"
 
 # Specify whether you want to maintain your version of NGINX, upgrade to the latest version, or remove NGINX.
 # Can be used with `nginx_version` to achieve fine tune control on which version of NGINX is installed/used on each playbook execution.
@@ -31,7 +24,6 @@ nginx_state: present
 
 # Specify repository origin for NGINX Open Source.
 # Options are 'nginx_repository', 'source' or 'os_repository'.
-# Only works if 'nginx_type' is set to 'opensource'.
 # Default is nginx_repository.
 nginx_install_from: nginx_repository
 
@@ -63,28 +55,6 @@ nginx_install_source_zlib: false
 # Only works if 'install_from' is set to 'nginx_repository' or 'source'.
 # Default is mainline.
 nginx_branch: mainline
-nginx_version: "1.17.10"
-
-# Location of your NGINX Plus license in your local machine.
-# Default is the files folder within the NGINX Ansible role.
-nginx_license:
-  certificate: license/nginx-repo.crt
-  key: license/nginx-repo.key
-
-# Remove NGINX Plus license and repository after installation for security purposes.
-# Default is false.
-nginx_delete_license: false
-
-# Install NGINX JavaScript, Perl, ModSecurity WAF (NGINX Plus only), GeoIP, Image-Filter, RTMP Media Streaming (NGINX Plus only), and/or XSLT modules.
-# Default is false.
-nginx_modules:
-  njs: false
-  perl: false
-  waf: false
-  geoip: false
-  image_filter: false
-  rtmp: false
-  xslt: false
 
 # Remove previously existing NGINX configuration files.
 # Use a list of paths you wish to remove.

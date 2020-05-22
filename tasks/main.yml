@@ -21,12 +21,7 @@
   block:
 
     - import_tasks: opensource/install-oss.yml
-      when: nginx_type == "opensource"
       tags: nginx_install_oss
-
-    - import_tasks: plus/install-plus.yml
-      when: nginx_type == "plus"
-      tags: nginx_install_plus
 
     - import_tasks: conf/cleanup-config.yml
       when: nginx_cleanup_config | bool
@@ -44,26 +39,11 @@
       when: nginx_main_template_enable
             or nginx_http_template_enable
             or nginx_stream_template_enable
-            or nginx_rest_api_enable
       tags: nginx_template_config
-
-    - import_tasks: conf/setup-status.yml
-      when: nginx_status_enable | bool
-      tags: nginx_setup_status
-
-    - import_tasks: modules/install-modules.yml
-      when: true in nginx_modules.values()
-      tags: nginx_install_modules
 
     - import_tasks: conf/debug-output.yml
       when: nginx_debug_output | bool
       tags: nginx_debug_output
-
-    - import_tasks: plus/delete-license.yml
-      when:
-        - nginx_type == "plus"
-        - nginx_delete_license
-      tags: nginx_delete_license
 
   when: nginx_enable | bool
 
