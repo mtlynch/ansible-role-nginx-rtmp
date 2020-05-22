@@ -55,15 +55,6 @@
   when: nginx_http_template_enable | bool
   notify: "(Handler: All OSs) Reload NGINX"
 
-
-- name: "(Setup: All NGINX) Dynamically Generate NGINX API Configuration File"
-  template:
-    src: "{{ nginx_rest_api_template_file | default('http/api.conf.j2') }}"
-    dest: "{{ nginx_rest_api_file_location | default('/etc/nginx/conf.d/api.conf') }}"
-    backup: yes
-  notify: "(Handler: All OSs) Reload NGINX"
-  when: nginx_rest_api_enable | bool
-
 - name: "(Setup: All NGINX) Ensure NGINX Stream Directory Exists"
   file:
     path: "{{ item.value.conf_file_location | default('/etc/nginx/conf.d/stream/') }}"
