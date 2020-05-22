@@ -3,7 +3,7 @@ Ansible NGINX Role
 
 [![Build Status](https://travis-ci.org/mtlynch/ansible-role-nginx-rtmp.svg?branch=master)](https://travis-ci.org/mtlynch/ansible-role-nginx-rtmp)
 
-This role installs NGINX Open Source or NGINX Unit on your target host.
+This role installs NGINX Open Source on your target host.
 
 **Note:** This role is still in active development. There may be unidentified issues and the role variables may change as development continues.
 
@@ -34,7 +34,7 @@ Use `git clone https://github.com/mtlynch/ansible-role-nginx-rtmp.git` to pull t
 Platforms
 ---------
 
-The NGINX Ansible role supports all platforms supported by [NGINX Open Source](https://nginx.org/en/linux_packages.html#mainline) and [NGINX Unit](https://unit.nginx.org/installation/#official-packages):
+The NGINX Ansible role supports all platforms supported by [NGINX Open Source](https://nginx.org/en/linux_packages.html#mainline):
 
 **NGINX Open Source**
 
@@ -67,32 +67,6 @@ Ubuntu:
     - bionic
 ```
 
-**NGINX Unit**
-
-```yaml
-CentOS:
-  versions:
-    - 6
-    - 7
-RedHat:
-  versions:
-    - 6
-    - 7
-Debian:
-  versions:
-    - buster
-Amazon Linux:
-  versions:
-    - 2018.03
-Amazon Linux 2:
-  versions:
-    - 2
-FreeBSD:
-  versions:
-    - 10
-    - 11
-```
-
 Role Variables
 --------------
 
@@ -103,7 +77,6 @@ This role has multiple variables. The descriptions and defaults for all these va
 -   **[defaults/main/upload.yml](./defaults/main/upload.yml):** NGINX configuration/HTML/SSL upload variables
 -   **[defaults/main/linux.yml](./defaults/main/linux.yml):** Linux installation variables
 -   **[defaults/main/bsd.yml](./defaults/main/bsd.yml):** BSD installation variables
--   **[defaults/main/unit.yml](./defaults/main/unit.yml):** NGINX Unit installation variables
 
 Dependencies
 ------------
@@ -328,22 +301,6 @@ This is a sample playbook file for deploying the Ansible Galaxy NGINX role in a 
         - notifempty
         - create 0644 www-data adm # Changes nginx logs permissions
         - sharedscripts
-```
-
-This is a sample playbook file for deploying the Ansible Galaxy NGINX role in a localhost to install NGINX Unit and the PHP/Perl NGINX Unit language modules.
-
-```yaml
----
-- hosts: localhost
-  become: true
-  roles:
-    - role: nginxinc.nginx
-  vars:
-    nginx_enable: false
-    nginx_unit_enable: true
-    nginx_unit_modules:
-      - unit-php
-      - unit-perl
 ```
 
 To run any of the above sample playbooks create a `setup-nginx.yml` file and paste the contents. Executing the Ansible Playbook is then as simple as executing `ansible-playbook setup-nginx.yml`.
