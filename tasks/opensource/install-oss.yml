@@ -3,7 +3,6 @@
   when: nginx_install_source_build_tools
   block:
 
-
     - name: "(Install: Linux) Install backports repo for Buster"
       apt_repository:
         repo: deb http://ftp.us.debian.org/debian buster-backports main
@@ -154,6 +153,17 @@
         chdir: "/tmp/{{ openssl_version }}"
         target: install
 
+- name: "Set nginx rtmp source dir"
+  set_fact:
+    nginx_rtmp_mod_source_dir: "/tmp/nginx-rtmp-module"
+
+- name: Get nginx-rtmp source
+  git:
+    repo: https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git
+    dest: "{{ nginx_rtmp_mod_source_dir }}"
+    version: 23ec4ce2d769830124abf3be1353dd9b105ab09c
+    accept_hostkey: yes
+
 - name: "(Install: Linux) Check for NGINX Install"
   stat:
     path: /usr/sbin/nginx
@@ -193,6 +203,8 @@
         --with-http_ssl_module
         --with-stream
         --with-mail=dynamic
+        --with-file-aio
+        --add-module={{ nginx_rtmp_mod_source_dir }}
         {{ nginx_install_source_pcre | ternary('', '--with-pcre=../' + pcre_version) }}
         {{ nginx_install_source_zlib | ternary('', '--with-zlib=../' + zlib_version) }}
         {{ nginx_install_source_openssl | ternary('', '--with-openssl=../' + openssl_version) }}
