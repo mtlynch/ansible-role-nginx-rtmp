@@ -1,4 +1,0 @@
----
-
-- name: "(Install: Linux) Install NGINX from source"
-  import_tasks: setup-source.yml
