@@ -22,15 +22,9 @@ nginx_version: "1.17.10"
 # Default is present.
 nginx_state: present
 
-# Specify repository origin for NGINX Open Source.
-# Options are 'nginx_repository', 'source' or 'os_repository'.
-# Default is nginx_repository.
-nginx_install_from: nginx_repository
-
 # Specify source install options for NGINX Open Source.
 # Options represent whether to install from source also
-# or to install from packages (default). These only apply
-# if 'nginx_install_from' is set to 'source'
+# or to install from packages (default).
 # For the tools, true means we will isntall from a package
 # and false means install from source.
 # 'nginx_install_source_build_tools' will install compiler
@@ -45,14 +39,8 @@ nginx_install_source_zlib: false
 # Default is the official NGINX signing key host.
 # nginx_signing_key: http://nginx.org/keys/nginx_signing.key
 
-# Specify source repository for NGINX Open Source.
-# Only works if 'install_from' is set to 'nginx_repository'.
-# Defaults are the official NGINX repositories.
-# nginx_repository: deb https://nginx.org/packages/mainline/debian/ stretch nginx
-
 # Specify which branch of NGINX Open Source you want to install.
 # Options are 'mainline' or 'stable'.
-# Only works if 'install_from' is set to 'nginx_repository' or 'source'.
 # Default is mainline.
 nginx_branch: mainline
 
