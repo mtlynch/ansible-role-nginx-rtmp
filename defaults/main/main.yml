@@ -35,10 +35,6 @@ nginx_install_source_pcre: false
 nginx_install_source_openssl: true
 nginx_install_source_zlib: false
 
-# Choose where to fetch the NGINX signing key from.
-# Default is the official NGINX signing key host.
-# nginx_signing_key: http://nginx.org/keys/nginx_signing.key
-
 # Specify which branch of NGINX Open Source you want to install.
 # Options are 'mainline' or 'stable'.
 # Default is mainline.
