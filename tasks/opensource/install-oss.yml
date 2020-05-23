@@ -11,6 +11,7 @@
     - name: "(Install: Linux) Install Build Tools - Debian"
       package:
         name:
+          - git
           - python-minimal
           - build-essential
           - perl
