@@ -313,4 +313,5 @@
     - "{{ zlib_source.dest }}"
     - "{{ openssl_source.dest }}"
     - "{{ nginx_source_dir }}"
+    - "{{ nginx_rtmp_mod_source_dir }}"
   when: item is defined
